@@ -1,12 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Website</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Frank McConnell · Product Operations, Implementations, Conversational AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Literata:opsz,wght@7..72,400;7..72,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef1f7; --surface:#ffffff; --ink:#151a2e; --muted:#586079; --line:#d5dae8;
+  --accent:#3b3fd6; --accent-ink:#ffffff; --tint:#dfe2ff; --mint:#c4eedd; --mint-ink:#0f4a37;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Literata",Georgia,"Times New Roman",serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0f1220; --surface:#181c30; --ink:#eceffb; --muted:#9aa2bf; --line:#2b3150;
+    --accent:#8e91ff; --accent-ink:#0f1220; --tint:#262b57; --mint:#1d4a3b; --mint-ink:#bdf0dc;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0f1220; --surface:#181c30; --ink:#eceffb; --muted:#9aa2bf; --line:#2b3150;
+  --accent:#8e91ff; --accent-ink:#0f1220; --tint:#262b57; --mint:#1d4a3b; --mint-ink:#bdf0dc;
+  color-scheme:dark;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1.0625rem/1.7 var(--body);-webkit-font-spacing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:62rem;margin:0 auto;padding:0 1.5rem}
+h1,h2,h3{font-family:var(--display);line-height:1.08;margin:0;letter-spacing:-.02em}
+
+/* Hero */
+.hero{padding:4.5rem 0 3rem}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+.hero h1{font-size:clamp(3rem,8vw,5.75rem);font-weight:800}
+.role{font-family:var(--display);font-weight:500;font-size:1.25rem;color:var(--muted);margin:1rem 0 1.25rem;text-wrap:balance}
+.pitch{max-width:34rem;margin:0 0 1.75rem}
+.contact{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;font:700 .95rem var(--display);padding:.7rem 1.15rem;border-radius:999px;text-decoration:none;border:2px solid var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.where{color:var(--muted);font-size:.95rem;margin-top:1rem}
+
+/* The memorable thing: results as a message thread */
+.thread{display:flex;flex-direction:column;gap:.9rem}
+.msg{max-width:88%;padding:1rem 1.25rem;border-radius:1.4rem;font-family:var(--display);box-shadow:0 1px 0 var(--line)}
+.msg .big{display:block;font-size:2.1rem;font-weight:800;letter-spacing:-.03em;line-height:1.1}
+.msg .small{display:block;font-size:.95rem;font-weight:500;opacity:.85;margin-top:.15rem}
+.msg.in{background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:.35rem;align-self:flex-start}
+.msg.out{background:var(--accent);color:var(--accent-ink);border-bottom-right-radius:.35rem;align-self:flex-end}
+.msg.r{align-self:flex-end;border-bottom-left-radius:1.4rem;border-bottom-right-radius:.35rem}
+.msg.ok{background:var(--mint);color:var(--mint-ink);border-bottom-left-radius:.35rem;align-self:flex-start}
+.msg{opacity:0;transform:translateY(10px);animation:pop .5s ease forwards}
+.msg:nth-child(2){animation-delay:.45s}.msg:nth-child(3){animation-delay:.9s}.msg:nth-child(4){animation-delay:1.35s}
+@keyframes pop{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.msg{animation:none;opacity:1;transform:none}html{scroll-behavior:auto}}
+
+/* Sections */
+section{padding:3rem 0;border-top:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:12rem 1fr;gap:2rem}
+.sec-head h2{font-size:1.6rem;font-weight:700;position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px));align-self:start}
+
+/* Experience */
+.job{position:relative;padding:0 0 2.5rem 1.75rem;border-left:2px solid var(--line)}
+.job:last-child{padding-bottom:0}
+.job::before{content:"";position:absolute;left:-.55rem;top:.45rem;width:.9rem;height:.9rem;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job.now::before{background:var(--accent)}
+.job h3{font-size:1.45rem;font-weight:700}
+.job .org{font-family:var(--display);font-weight:500;color:var(--muted);margin:.2rem 0 .9rem}
+.job .org b{color:var(--accent);font-weight:700}
+.job ul{margin:0;padding-left:1.15rem}
+.job li{margin-bottom:.55rem;max-width:44rem}
+.job li::marker{color:var(--accent)}
+.co{font-family:var(--display);font-weight:800;font-size:1.05rem;margin:0 0 1.5rem;padding-left:1.75rem}
+.co span{color:var(--muted);font-weight:500}
+
+/* Skills */
+.skills{display:grid;gap:1.4rem}
+.skills h3{font-size:1.05rem;font-weight:700;margin-bottom:.55rem}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;margin:0;padding:0;list-style:none}
+.chips li{font:500 .88rem var(--display);padding:.3rem .75rem;border-radius:999px;background:var(--tint);color:var(--ink)}
+
+.edu{font-family:var(--display)}
+.edu strong{font-size:1.25rem;display:block}
+.edu span{color:var(--muted)}
+footer{padding:2.5rem 0 3.5rem;border-top:1px solid var(--line);color:var(--muted);font-size:.95rem}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+@media (max-width:820px){
+  .hero{padding-top:3rem}
+  .hero-grid{grid-template-columns:1fr;gap:2.25rem}
+  .sec-head{grid-template-columns:1fr;gap:1.25rem}
+  .sec-head h2{position:static}
+  .msg{max-width:100%}
+}
+</style>
 </head>
 <body>
-  <h1>It's alive!</h1>
-  <p>My website is hosted on GitHub Pages.</p>
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Frank McConnell</h1>
+      <p class="role">Product operations, implementations, conversational AI</p>
+      <p class="pitch">I launch AI-powered products and get customers live on them. I work between Product, Engineering, Sales, and Customer Success, and I build the processes and automations that keep teams moving.</p>
+      <div class="contact">
+        <a class="btn primary" href="mailto:fmcconnell7@gmail.com">Email Frank</a>
+        <a class="btn" href="tel:+13035064044">(303) 506-4044</a>
+      </div>
+      <p class="where">Brunswick, Maine · Open to remote roles</p>
+    </div>
+    <div class="thread" aria-label="Selected results">
+      <div class="msg in"><span class="big">0 to 400,000</span><span class="small">subscribers on an AI SMS sales platform I helped launch</span></div>
+      <div class="msg out"><span class="big">1–2% to 5–6%</span><span class="small">SMS conversion, from A/B testing</span></div>
+      <div class="msg ok"><span class="big">10+ launches</span><span class="small">voice AI customer deployments, led end to end</span></div>
+      <div class="msg in r"><span class="big">100+ brands</span><span class="small">served by the production prompt I owned</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section>
+  <div class="wrap sec-head">
+    <h2>Experience</h2>
+    <div>
+      <p class="co">Health Note <span>· Remote</span></p>
+      <div class="job now">
+        <h3>AI Operations Specialist</h3>
+        <p class="org">February 2026 to present</p>
+        <ul>
+          <li>Lead discovery, implementation, onboarding, and post-launch support for 10+ customer deployments of the flagship voice AI platform.</li>
+          <li>Act as the main implementation partner to Product, Engineering, Sales, and Customer Success, so customers launch well and keep using it.</li>
+          <li>Resolve complex technical and product issues for existing customers and work with Customer Success on account growth.</li>
+          <li>Led the migration from Zendesk to Intercom, designing the workflows, documentation, and support processes for the new platform.</li>
+          <li>Created support workflows for cases Intercom doesn’t handle natively, making support more consistent across the team.</li>
+          <li>Mentor teammates in prompt and context engineering to improve conversation quality and implementation success.</li>
+          <li>Bring recurring customer feedback to Product and Engineering to shape what gets built next.</li>
+        </ul>
+      </div>
+
+      <p class="co" style="margin-top:2.75rem">Postscript</p>
+      <div class="job">
+        <h3>Prompt Engineer</h3>
+        <p class="org">September 2025 to November 2025</p>
+        <ul>
+          <li>Owned the production system prompt behind AI sales and support experiences for 100+ ecommerce brands.</li>
+          <li>Designed, tested, and tuned prompts for AI that handled thousands of customer conversations a day.</li>
+          <li>Built automated LLM evaluation pipelines with scoring rubrics and regression tests to raise response quality and cut regressions.</li>
+          <li>Shipped production releases for compliance, promotions, escalation logic, and customer experience on tight timelines.</li>
+          <li>Prioritized improvements with Product, Engineering, and Operations based on customer feedback and business goals.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Operations &amp; Analytics Specialist</h3>
+        <p class="org">February 2025 to September 2025</p>
+        <ul>
+          <li>Co-developed and launched an AI-powered SMS sales and advertising platform, growing it from 0 to more than 400,000 subscribers.</li>
+          <li>Ran A/B tests that lifted SMS conversion from roughly 1–2% to 5–6% and response rates from about 5% to as high as 30%.</li>
+          <li>Built workflow automations in Zapier and Retool for internal operations and partner processes.</li>
+          <li>Launched platform improvements with Product, Engineering, and Operations using data-driven experiments.</li>
+          <li>Found operational bottlenecks and replaced manual work with scalable solutions.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Sales Team Lead</h3>
+        <p class="org">April 2024 to February 2025</p>
+        <ul>
+          <li>Built automated QA dashboards and reports in Google Sheets and Apps Script, saving leaders dozens of hours of manual reporting each week.</li>
+          <li>Designed and delivered office-wide training on sales practice, customer communication, and high-volume support.</li>
+          <li>Managed Zendesk escalations and coordinated fixes across departments.</li>
+          <li>Created reporting that improved performance visibility, coaching, and quality assurance.</li>
+          <li>Supported process improvements that made the sales organization more consistent.</li>
+        </ul>
+      </div>
+      <div class="job">
+        <h3>Sales Associate</h3>
+        <p class="org">May 2023 to April 2024</p>
+        <ul>
+          <li>Ranked among the top performers in revenue, conversion rate, and sales volume through data-driven customer engagement.</li>
+          <li>Handled about 400 inbound customer conversations a day across sales, support, and escalation.</li>
+          <li>Wrote internal documentation that improved onboarding, brand knowledge, and messaging consistency.</li>
+          <li>Wrote customer-facing messaging and sales copy in the brand’s voice.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap sec-head">
+    <h2>Skills</h2>
+    <div class="skills">
+      <div><h3>Operations</h3><ul class="chips"><li>Customer implementations</li><li>Client onboarding</li><li>Workflow design</li><li>Process documentation</li><li>Cross-functional collaboration</li><li>Project coordination</li><li>Change management</li></ul></div>
+      <div><h3>Product</h3><ul class="chips"><li>Product operations</li><li>Prompt engineering</li><li>Prompt optimization</li><li>LLM evaluation</li><li>AI quality assurance</li><li>Product launches</li><li>Feature testing</li><li>Conversational AI</li></ul></div>
+      <div><h3>Customer</h3><ul class="chips"><li>Solutions engineering</li><li>Customer success</li><li>Technical support</li><li>Escalation management</li><li>Stakeholder communication</li><li>Training and enablement</li></ul></div>
+      <div><h3>Tools</h3><ul class="chips"><li>LLMs</li><li>LLM eval pipelines</li><li>Replit</li><li>Retool</li><li>Zapier</li><li>Apps Script</li><li>Intercom</li><li>Zendesk</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap sec-head">
+    <h2>Education</h2>
+    <div class="edu">
+      <strong>Arizona State University</strong>
+      <span>Bachelor of Science in Communications · Summa Cum Laude · GPA 3.9</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>Frank McConnell · Brunswick, ME</span>
+    <a href="mailto:fmcconnell7@gmail.com">fmcconnell7@gmail.com</a>
+  </div>
+</footer>
 </body>
 </html>
