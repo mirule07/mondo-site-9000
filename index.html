@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='14' fill='%2312a150'/%3E%3Ctext x='50' y='72' font-size='64' font-weight='800' font-family='Arial,sans-serif' text-anchor='middle' fill='white'%3EF%3C/text%3E%3C/svg%3E">
-<title>Hire me, please! · Frank McConnell</title>
+<title>Frank McConnell · Ready to go live</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@500;700;900&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
@@ -40,12 +40,13 @@ h1{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900}
 .msg{opacity:0;transform:translateY(8px);animation:pop .45s ease forwards;max-width:90%}
 .msg:nth-child(2){animation-delay:.4s}.msg:nth-child(3){animation-delay:.8s}.msg:nth-child(4){animation-delay:1.2s}.msg:nth-child(5){animation-delay:1.6s}.msg:nth-child(6){animation-delay:2s}
 @keyframes pop{to{opacity:1;transform:none}}
-.q{align-self:flex-start;font-weight:500;color:var(--muted);padding:.45rem .9rem;border:2px solid var(--rule);border-radius:4px 4px 4px 0}
+.q{align-self:flex-start;font-size:.94rem;font-weight:500;color:var(--muted);padding:.45rem .9rem;border:2px solid var(--rule);border-radius:4px 4px 4px 0}
 .a{align-self:flex-end;padding:1rem 1.25rem;border-radius:4px 4px 0 4px;background:var(--ink);color:var(--paper)}
 .a.live{background:var(--live);color:var(--live-ink)}
 .a b{display:block;font-weight:900;letter-spacing:-.03em;line-height:1.05}
 .a span{display:block;font-weight:500;font-size:.95rem;margin-top:.3rem;opacity:.9}
-.a.l b{font-size:2.6rem}.a.m b{font-size:2rem}
+.a.l b{font-size:2.6rem}.a.m b{font-size:2.6rem}
+.a b span{display:inline;font-size:inherit;font-weight:inherit;margin:0;opacity:1}
 @media (prefers-reduced-motion:reduce){.msg{animation:none;opacity:1;transform:none}}
 
 /* Sections */
@@ -78,25 +79,84 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
   .msg{max-width:100%}
   .skills div{grid-template-columns:1fr;gap:.1rem}
 }
+
+/* Extras */
+.links{align-items:center}
+.links .kick{background:var(--live);color:var(--live-ink);padding:.7rem 1.2rem;border-radius:4px;text-decoration:none}
+.links .kick:hover{filter:brightness(1.1)}
+.dot{display:inline-block;width:.6rem;height:.6rem;border-radius:50%;background:var(--live);margin-right:.55rem;animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--live) 55%,transparent)}70%,100%{box-shadow:0 0 0 .5rem transparent}}
+.theme{position:fixed;top:calc(.75rem + env(safe-area-inset-top,0px));right:.75rem;z-index:5;font:700 .85rem var(--display);padding:.45rem .8rem;border:2px solid var(--ink);border-radius:4px;background:var(--paper);color:var(--ink);cursor:pointer}
+.theme:hover{background:var(--ink);color:var(--paper)}
+.theme:focus-visible{outline:3px solid var(--live);outline-offset:3px}
+.thread{position:relative}
+.js .msg{visibility:hidden;animation:none;opacity:0;transform:translateY(8px)}
+.js .msg.show{visibility:visible;animation:pop .5s ease forwards}
+.js .msg.typing{position:absolute;right:0;display:flex;gap:.3rem;padding:.95rem 1.1rem;visibility:visible;opacity:1;transform:none}
+.typing i{width:.5rem;height:.5rem;border-radius:50%;background:currentColor;animation:blink 1s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes blink{0%,100%{opacity:.3}50%{opacity:1}}
+.js .box::after{opacity:0;transform:scale(.4);transition:opacity .25s,transform .25s}
+.js .job.ticked .box::after{opacity:1;transform:none}
+.js .live-job .box{background:transparent;border-color:var(--ink);color:var(--ink);transition:background .3s,border-color .3s,color .3s}
+.js .live-job.ticked .box{background:var(--live);border-color:var(--live);color:var(--live-ink)}
+.js .live-job:not(.ticked) .meta em{color:var(--ink)}
+@media (max-width:820px){.hero{padding-top:4rem}}
+@media (prefers-reduced-motion:reduce){.dot,.typing i{animation:none}}
+@keyframes fade{to{opacity:1}}
+.js.calm .msg{transform:none}
+.js.calm .msg.show{animation:fade .375s ease forwards}
+.js.calm .box::after{transform:none}
+@media print{
+  :root:root:root{--paper:#fff;--ink:#000;--muted:#444;--rule:#ccc;--live:#0a7a3b;--live-ink:#fff}
+  .theme,.thread,.links .kick{display:none!important}
+  body{font-size:10.5pt;line-height:1.4}
+  .hero{padding:0 0 1rem}.grid{grid-template-columns:1fr;gap:0}
+  h1{font-size:2.4rem}.role{font-size:1rem;margin:.4rem 0}.role br{display:none}
+  .role::after{content:""}
+  section{padding:1rem 0 .5rem}h2{font-size:1.3rem;margin-bottom:.6rem}
+  .job{padding:.7rem 0;break-inside:avoid}
+  .js .box::after{opacity:1!important;transform:none!important}
+  .js .live-job .box{background:var(--live)!important;border-color:var(--live)!important;color:#fff!important}
+  .js .live-job .meta em{color:var(--live)!important}
+  .dot{animation:none}
+}
+.theme{width:2.5rem;height:2.5rem;padding:0;border:0;background:transparent;display:grid;place-items:center;border-radius:50%}
+.theme:hover{background:transparent;color:var(--live)}
+.theme svg{width:1.5rem;height:1.5rem;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.theme[data-on="true"] .bulb{fill:#f5c542}
+.bar{position:fixed;top:0;left:0;right:0;z-index:4;background:var(--paper);border-bottom:3px solid var(--ink);padding-top:env(safe-area-inset-top,0px);transform:translateY(-100%);visibility:hidden;transition:transform .3s ease,visibility 0s .3s}
+.bar.on{transform:none;visibility:visible;transition:transform .3s ease}
+.bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:3.25rem;padding-right:4.5rem;font-family:var(--display)}
+.bar strong{font-weight:900;font-size:1.05rem;letter-spacing:-.02em}
+.bar .ct{display:flex;gap:1.4rem}
+.bar a{font-weight:500;text-decoration:none}
+.bar a:hover{text-decoration:underline;text-underline-offset:4px}
+.bar .s{display:none}
+@media (max-width:820px){.bar .wrap{padding-right:3.5rem}.bar .l{display:none}.bar .s{display:inline}.bar .ct{gap:1rem}}
+@media (prefers-reduced-motion:reduce){.bar{transition:none}}
+@media print{.bar{display:none!important}}
 </style>
 </head>
 <body>
+<button class="theme" id="theme" type="button" aria-label="Switch to dark mode"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="bulb" d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></button>
+<div class="bar" id="bar"><div class="wrap"><strong>Frank McConnell</strong><div class="ct"><a href="mailto:fmcconnell7@gmail.com"><span class="l">fmcconnell7@gmail.com</span><span class="s">Email</span></a><a href="tel:+12073702323"><span class="l">(207) 370-2323</span><span class="s">Call</span></a></div></div></div>
 <header class="hero">
   <div class="wrap grid">
     <div>
       <h1>Frank McConnell</h1>
       <p class="role">Product operations<br>Implementations<br>Conversational AI</p>
       <p class="pitch">I build and launch AI products. I started with an AI SMS sales platform and now work on voice agents, handling discovery, implementation, onboarding, and support from kickoff through post-launch. I work with Product, Engineering, and Sales to make every launch smoother than the last.</p>
-      <div class="links"><a href="mailto:fmcconnell7@gmail.com">fmcconnell7@gmail.com</a><a href="tel:+13035064044">(303) 506-4044</a></div>
-      <p class="where">Brunswick, Maine · Open to remote roles</p>
+      <div class="links"><a class="kick" href="mailto:fmcconnell7@gmail.com?subject=Kickoff%20call&amp;body=Hi%20Frank%2C%0A%0AI%27d%20like%20to%20set%20up%20a%20kickoff%20call.">Book a kickoff</a><a href="tel:+12073702323">(207) 370-2323</a></div>
+      <p class="where"><i class="dot"></i>Brunswick, Maine · Open to remote roles</p>
     </div>
     <div class="thread" aria-label="Selected results">
       <div class="msg q">Can you launch from zero?</div>
-      <div class="msg a l"><b>0 to 400,000</b><span>subscribers on an AI SMS sales platform I helped build and launch</span></div>
+      <div class="msg a l"><b>0 to <span data-to="400000">400,000</span></b><span>subscribers on an AI SMS sales platform I helped build and launch</span></div>
       <div class="msg q">Can you keep AI quality up at scale?</div>
-      <div class="msg a m"><b>100+ brands</b><span>one production prompt, with eval pipelines catching regressions</span></div>
+      <div class="msg a m"><b><span data-to="100">100</span>+ brands</b><span>one production prompt, with eval pipelines catching regressions</span></div>
       <div class="msg q">Can you get customers live?</div>
-      <div class="msg a l live"><b>10+ agents launched</b><span>taken from discovery to go-live, with post-launch support</span></div>
+      <div class="msg a l live"><b><span data-to="10">10</span>+ agents launched</b><span>taken from discovery to go-live, with post-launch support</span></div>
     </div>
   </div>
 </header>
@@ -205,5 +265,38 @@ footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
 </main>
 
 <footer><div class="wrap"><span>Frank McConnell · Brunswick, ME</span><a href="mailto:fmcconnell7@gmail.com">fmcconnell7@gmail.com</a></div></footer>
+<script>
+(function(){
+var d=document,r=d.documentElement,btn=d.getElementById('theme');
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function isDark(){var t=r.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches}
+function label(){btn.dataset.on=isDark()?'false':'true';btn.setAttribute('aria-label',isDark()?'Switch to light mode':'Switch to dark mode')}
+try{var saved=localStorage.getItem('theme');if(saved)r.dataset.theme=saved}catch(e){}
+btn.onclick=function(){var n=isDark()?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('theme',n)}catch(e){}label()};
+label();
+r.classList.add('js');if(reduce)r.classList.add('calm');var bar=d.getElementById('bar'),sec=d.querySelector('main section');function chk(){bar.classList.toggle('on',sec.getBoundingClientRect().top<=2)}addEventListener('scroll',chk,{passive:true});chk();
+var wait=function(ms){return new Promise(function(f){setTimeout(f,ms)})};
+function count(el){var to=+el.dataset.to,t0=performance.now(),dur=1125;
+  (function f(t){var p=Math.min((t-t0)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.round(to*e).toLocaleString('en-US');if(p<1)requestAnimationFrame(f)})(t0)}
+var thread=d.querySelector('.thread'),msgs=[].slice.call(thread.querySelectorAll('.msg'));
+(async function(){
+  for(var i=0;i<msgs.length;i++){
+    var m=msgs[i];
+    if(m.classList.contains('a')){
+      
+      
+      await wait(375);
+      m.classList.add('show');m.querySelectorAll('[data-to]').forEach(count);
+      await wait(313);
+    }else{m.classList.add('show');await wait(313)}
+  }
+})();
+var live=d.querySelector('.live-job .meta em');if(live)live.textContent='In progress';
+var io=new IntersectionObserver(function(es){es.forEach(function(e){
+  if(e.isIntersecting){var j=e.target;io.unobserve(j);
+    setTimeout(function(){j.classList.add('ticked');if(j.classList.contains('live-job')&&live)live.textContent='Live'},250)}})},{threshold:.3});
+[].forEach.call(d.querySelectorAll('.job'),function(j){io.observe(j)});
+})();
+</script>
 </body>
 </html>
